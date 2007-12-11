@@ -198,7 +198,7 @@ vector<TransientVertex> AdaptiveVertexReconstructor::vertices (
       }
       TransientVertex newvtx = cleanUp ( tmpvtx );
       ret.push_back ( newvtx );
-      erase ( newvtx, remainingtrks, theWeightThreshold );
+      erase ( newvtx, remainingtrks, theMinWeight );
       if ( n_tracks == remainingtrks.size() )
       {
         if ( usespot )
@@ -237,6 +237,7 @@ vector<TransientVertex> AdaptiveVertexReconstructor::cleanUpVertices (
   vector < TransientVertex > ret;
   for ( vector< TransientVertex >::const_iterator i=old.begin(); i!=old.end() ; ++i )
   {
+   cout << "AVR vertex: "<< old.end() - i << i->position()<<i->positionError().matrix()<<endl;
     if (!(i->hasTrackWeight()))
     { // if we dont have track weights, we take the vtx
       ret.push_back ( *i );
